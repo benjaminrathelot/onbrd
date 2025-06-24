@@ -1,0 +1,24 @@
+{
+  "name": "onbrd",
+  "version": "1.0.0",
+  "description": "A lightweight, flexible onboarding engine for modern web apps. Elegant. Adaptable.",
+  "type": "module",
+  "main": "dist/onbrd.js",
+  "files": [
+    "dist/",
+    "onbrd.d.ts",
+    "license.md",
+    "readme.md"
+  ],
+  "keywords": ["onboarding", "tour", "guide","introduction", "front-end", "js", "demo", "intro", "onbrd", "presentation", "ui"],
+  "license": "MIT non-commercial",
+  "author": "Benjamin Rathelot",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benjaminrathelot/onbrd.git"
+  },
+  "homepage": "https://github.com/benjaminrathelot/onbrd",
+  "bugs": {
+    "url": "https://github.com/benjaminrathelot/onbrd/issues"
+  },
+}

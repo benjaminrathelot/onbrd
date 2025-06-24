@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Onbrd Onboarding Demo - Admin Dashboard</title>
+    <link rel="stylesheet" href="src/onbrd.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        body { font-family: Inter, sans-serif; }
+        .onbrd-container { display: flex; min-height: 100vh; }
+        .onbrd-sidebar { width: 240px; background: #343a40; color: white; padding: 1rem; }
+        .onbrd-sidebar a { color: #ccc; display: block; margin: 0.5rem 0; text-decoration: none; }
+        .onbrd-sidebar a:hover { color: #fff; }
+        .onbrd-main { flex: 1; padding: 2rem; }
+        .onbrd-header { background: #f8f9fa; padding: 1rem 2rem; margin-bottom: 1rem; border-bottom: 1px solid #dee2e6; }
+        .onbrd-card { margin-bottom: 1.5rem; }
+        .controls { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
+        #extra-options { display: none; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+
+<div class="onbrd-container">
+    <aside class="onbrd-sidebar" id="sidebar">
+        <h5>Admin Menu</h5>
+        <a href="#">Dashboard</a>
+        <a href="#">Users</a>
+        <a href="#">Settings</a>
+    </aside>
+
+    <div class="onbrd-main">
+        <div class="onbrd-header" id="header">
+            <h3>Admin Dashboard</h3>
+            <button id="btn-add-user" class="btn btn-primary mt-2">Add User</button>
+        </div>
+
+        <div class="onbrd-card card" id="user-table">
+            <div class="card-header">User List</div>
+            <div class="card-body">
+                <table class="table">
+                    <thead><tr><th>Name</th><th>Email</th><th>Actions</th></tr></thead>
+                    <tbody>
+                        <tr><td>John Doe</td><td>john@example.com</td><td><button class="btn btn-sm btn-outline-secondary">Edit</button></td></tr>
+                        <tr><td>Jane Smith</td><td>jane@example.com</td><td><button class="btn btn-sm btn-outline-secondary">Edit</button></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="onbrd-card card" id="form-section">
+            <div class="card-header">New User</div>
+            <div class="card-body">
+                <input id="input-name" type="text" class="form-control mb-3" placeholder="Name">
+                <input id="input-email" type="email" class="form-control mb-3" placeholder="Email">
+                <button id="btn-submit" class="btn btn-success">Submit</button>
+
+                <div id="extra-options" class="alert alert-secondary mt-3">
+                    Advanced Options Loaded!
+                </div>
+            </div>
+        </div>
+
+        <div id="dynamic-section" class="alert alert-info mt-4" style="display:none;">
+            Dynamic section loaded!
+        </div>
+
+    </div>
+</div>
+
+<div class="controls">
+    <button id="start" class="btn btn-primary btn-sm">Start Tour</button>
+    <button id="restart" class="btn btn-secondary btn-sm">Restart</button>
+    <button id="pause" class="btn btn-secondary btn-sm">Pause</button>
+    <button id="resume" class="btn btn-secondary btn-sm">Resume</button>
+    <button id="goto-form" class="btn btn-secondary btn-sm">Go to Form</button>
+</div>
+
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="src/onbrd.js"></script>
+<script src="src/onbrd-crosspage.js"></script>
+<script>
+    registerCrossPage(Onbrd);
+
+    const myOnboarding = new Onbrd({
+        steps: [
+            { stepId: 'welcome', type: 'main', html: "<h2>Welcome to your Admin Dashboard</h2><p>This tour will guide you through key actions and features.</p>" },
+
+            { stepId: 'sidebar', type: 'tooltip', selector: '#sidebar', text: "This is your main navigation menu.", position: "right" },
+
+            { stepId: 'header', type: 'tooltip', selector: '#header', text: "Here you can see the page title and main actions." },
+
+            { stepId: 'add-user', type: 'tooltip', selector: '#btn-add-user', text: "Click here to add a new user (click interception).", captureClick: true },
+
+            { stepId: 'form-name', type: 'tooltip', selector: '#input-name', text: "Enter the user's name (typewriter effect).", typewriter: "Alice", autoFocus: true, nextCondition: () => document.querySelector('#input-name').value.length > 0 },
+
+            { stepId: 'form-email', type: 'tooltip', selector: '#input-email', text: "Now enter the user's email (NextCondition demo).", typewriter: "alice@example.com", autoFocus: true, nextCondition: () => document.querySelector('#input-email').value.includes('@') },
+
+            { stepId: 'show-advanced', type: 'tooltip', selector: '#btn-submit', text: "Click to submit and show advanced options.", captureClick: true, onAction: () => {
+                document.getElementById('extra-options').style.display = 'block';
+            }},
+
+            { stepId: 'advanced-options', type: 'tooltip', selector: '#extra-options', text: "These advanced options are conditionally visible.", skipHiddenElement: true },
+
+            { stepId: 'user-table', type: 'tooltip', selector: '#user-table', text: "Here is the user list (scroll highlight).", position: "top" },
+
+            { stepId: 'dynamic', type: 'tooltip', selector: '#dynamic-section', text: "This section loads dynamically (waitForElement).", waitForElement: '#dynamic-section', skipOnDisappear: false },
+
+            { stepId: 'end', type: 'main', html: "<h2>All done!</h2><p>You are now familiar with the key features of the dashboard.</p>" }
+        ],
+        colors: {
+            primary: "#0d6efd",
+            dark: "#212529"
+        },
+        font: "Inter, sans-serif",
+        storageKey:null,
+        onComplete: () => { console.log("✅ Onboarding terminé"); },
+        onError: (err) => console.error(err),
+        autoStart: true
+    });
+
+    // Simulate dynamic content appearing after 1.5s
+    setTimeout(() => {
+        document.getElementById('dynamic-section').style.display = 'block';
+    }, 1500);
+
+    // Controls
+    document.getElementById('start').addEventListener('click', () => myOnboarding.start());
+    document.getElementById('restart').addEventListener('click', () => myOnboarding.restart());
+    document.getElementById('pause').addEventListener('click', () => myOnboarding.pause());
+    document.getElementById('resume').addEventListener('click', () => myOnboarding.resume());
+    document.getElementById('goto-form').addEventListener('click', () => myOnboarding.goToStep('form-name'));
+
+    myOnboarding.enableCrossPage();
+</script>
+
+</body>
+</html>
