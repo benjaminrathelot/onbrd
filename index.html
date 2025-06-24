@@ -134,6 +134,7 @@ onboarding.start();</code></pre>
     </div>
     <div class="mt-3">
         <button id="restart-demo" class="btn btn-outline-secondary btn-sm">Restart Demo</button>
+        <a href="try me.html" target="_blank" class="btn btn-outline-secondary btn-sm">View extended demo</a>
     </div>
 </section>
 
@@ -173,7 +174,7 @@ onboarding.start();</code></pre>
             { stepId: 'btn', type: 'tooltip', selector: '#demo-button', text: "Click this button to proceed.", captureClick: true },
             { stepId: 'input', type: 'tooltip', selector: '#demo-input', text: "Now type your name below.", typewriter: "Alice", autoFocus: true, nextCondition: () => document.querySelector('#demo-input').value.length >= 3 },
             { stepId: 'link', type: 'tooltip', selector: '#demo-link', text: "Click this link to continue. Here, <code>passThrough</code> is set to <code>false</code> (link won't navigate).", captureClick: true, passThrough: false },
-            { stepId: 'end', type: 'main', html: "<h2>All done 🎉</h2><p>Thanks for trying Onbrd.js! You can restart the demo anytime.</p>" }
+            { stepId: 'end', type: 'main', html: "<h2>All done 🎉</h2><p>Thanks for trying Onbrd.js! You can restart the demo anytime, or try this other demo:</p><a href='try me.html' target='_blank' class='btn btn-secondary btn-lg px-4'>Another demo</a>" }
         ],
         colors: { primary: "#0d6efd", dark: "#212529" },
         font: "Inter, sans-serif",
