@@ -12,7 +12,7 @@
 
 Perfect for **SaaS platforms, Admin Dashboards, B2B tools, Internal apps**.
 
----
+
 
 ## ✨ Key Features
 
@@ -30,7 +30,7 @@ Perfect for **SaaS platforms, Admin Dashboards, B2B tools, Internal apps**.
 ✅ No runtime dependency except Popper.js (2kb gzipped)
 ✅ Full CSS customization and localization
 
----
+
 
 ## 🚀 Installation
 
@@ -48,12 +48,15 @@ import 'onbrd/dist/onbrd.css';
 ### via CDN
 
 ```html
-<link rel="stylesheet" href="onbrd.css" />
+<link rel="stylesheet" href="https://unpkg.com/onbrd@1.0.0/dist/onbrd.css" />
 <script src="https://unpkg.com/@popperjs/core@2"></script>
-<script src="onbrd.js"></script>
+<script src="https://unpkg.com/onbrd@1.0.0/dist/onbrd.js"></script>
+```
+Or minified:
+```html
+<script src="https://unpkg.com/onbrd@1.0.0/dist/onbrd.min.js"></script>
 ```
 
----
 
 ## 🧩 Basic Usage
 
@@ -70,7 +73,7 @@ const onboarding = new Onbrd({
 
 When `autoStart: true` is set, **Onbrd waits for DOM ready** and starts automatically.
 
----
+
 
 ## ⚙️ Configuration
 
@@ -90,7 +93,7 @@ When `autoStart: true` is set, **Onbrd waits for DOM ready** and starts automati
 | `onError(err, step)`      | `Function`       | Called if a step cannot be displayed                                          |
 | `autoStart`               | `Boolean`        | Start automatically (default: true)                                           |
 
----
+
 
 ## 📚 Steps definition
 
@@ -123,7 +126,6 @@ Each step object can be:
 | `autoFocus`         | Focus input when using `typewriter`                                        |
 | `skipOnDisappear`   | If false, pauses if element disappears (default: skips)                    |
 
----
 
 ## 🔍 API Methods
 
@@ -137,7 +139,7 @@ Each step object can be:
 | `enableCrossPage()`    | Enable cross-page persistence                       |
 | `disableCrossPage()`   | Disable cross-page persistence                      |
 
----
+
 
 ## 🎨 Styling / Theming
 
@@ -155,7 +157,6 @@ Onbrd exposes the following CSS variables:
 
 You can override them globally or dynamically.
 
----
 
 ## 🌍 Labels & Localization
 
@@ -173,7 +174,7 @@ labels: {
 }
 ```
 
----
+
 
 ## 🔄 Cross-page onboarding
 
@@ -191,7 +192,7 @@ onboarding.enableCrossPage();
 onboarding.start();
 ```
 
----
+
 
 ## 🏗️ Example: Admin Dashboard Tour
 
@@ -205,7 +206,7 @@ steps: [
 ]
 ```
 
----
+
 
 ## ⚠️ Requirements
 
@@ -215,7 +216,7 @@ Onbrd requires **Popper.js v2**:
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 ```
 
----
+
 
 ## 📁 Project structure
 
@@ -230,7 +231,7 @@ onbrd-crosspage.js
 onbrd.css
 ```
 
----
+
 
 ## 📃 License & Commercial Use
 
@@ -259,14 +260,14 @@ An invoice will be issued to the company name and email you provide.
 
 You may not resell, redistribute, or sublicense the library.
 
----
+
 
 ## 💬 Support & Contact
 
 * Issues and PR on GitHub
 * Email: `benjamin [at] rathelot [dot] com` (no spam please!)
 
----
+
 
 ## 🚫 Disclaimer
 
