@@ -1,53 +1,63 @@
-Onbrd.js
-Onbrd.js is a lightweight JavaScript engine to create interactive onboarding experiences on web applications:
+# Onbrd.js
+
+**Onbrd.js** is a lightweight JavaScript engine to create **interactive onboarding experiences** on web applications:
 
 ✅ Tooltips anchored to elements
 ✅ Modal steps (main steps)
 ✅ Highlights & guided tours
 ✅ Click triggers and form typing
 ✅ Supports cross-page onboarding
-✅ Tiny footprint — no dependency except Popper.js v2
+✅ Tiny footprint — no dependency except [Popper.js v2](https://popper.js.org/)
 ✅ Works with any framework (vanilla JS, React, Vue...)
 
-Perfect for SaaS platforms, Admin Dashboards, B2B tools, Internal apps.
+Perfect for **SaaS platforms, Admin Dashboards, B2B tools, Internal apps**.
 
-✨ Key Features
-Why Onbrd.js is more powerful than most onboarding tools:
+---
 
-✅ Supports both main modals and tooltips
-✅ Click interception: wait for a user click before progressing (ex: "Click Add User")
-✅ Control whether click is passed through (passThrough: true|false)
-✅ Typewriter effect: simulate typing in fields (ex: forms)
-✅ NextCondition: dynamically enable Next button (ex: user must fill form)
-✅ Auto scroll & highlight
-✅ Waits for async content (waitForElement)
+## ✨ Key Features
+
+**Why Onbrd.js is more powerful than most onboarding tools:**
+
+✅ Supports both **main modals** and **tooltips**
+✅ **Click interception**: wait for a user click before progressing (ex: "Click Add User")
+✅ Control whether click is passed through (`passThrough: true|false`)
+✅ **Typewriter effect**: simulate typing in fields (ex: forms)
+✅ **NextCondition**: dynamically enable Next button (ex: user must fill form)
+✅ **Auto scroll & highlight**
+✅ **Waits for async content** (`waitForElement`)
 ✅ Cross-page onboarding with persistence
 ✅ Tiny bundle, works with any stack: vanilla JS, React, Vue, Angular
 ✅ No runtime dependency except Popper.js (2kb gzipped)
 ✅ Full CSS customization and localization
 
-🚀 Installation
-via npm
-bash
-Copy
-Edit
+---
+
+## 🚀 Installation
+
+### via npm
+
+```bash
 npm install onbrd
-js
-Copy
-Edit
+```
+
+```js
 import Onbrd from 'onbrd';
 import 'onbrd/dist/onbrd.css';
-via CDN
-html
-Copy
-Edit
+```
+
+### via CDN
+
+```html
 <link rel="stylesheet" href="onbrd.css" />
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 <script src="onbrd.js"></script>
-🧩 Basic Usage
-js
-Copy
-Edit
+```
+
+---
+
+## 🧩 Basic Usage
+
+```js
 const onboarding = new Onbrd({
   steps: [
     { stepId: 'welcome', type: 'main', html: '<h2>Welcome!</h2><p>This is your onboarding tour.</p>' },
@@ -56,69 +66,84 @@ const onboarding = new Onbrd({
   ],
   autoStart: true
 });
-When autoStart: true is set, Onbrd waits for DOM ready and starts automatically.
+```
 
-⚙️ Configuration
-Option  Type  Description
-steps Array Ordered list of steps (see below)
-colors  Object  Customize primary, dark, overlay, background colors
-font  String  Font-family used by the UI
-labels  Object  Text labels for buttons
-storageKey  String | null Key used to persist progress in localStorage (or null for no persistence)
-storage Storage Custom storage object (optional)
-forceExitConfirm  Boolean Ask confirmation before exiting the tour
-onStart Function  Called when the tour starts
-onShowStep(step, index) Function  Called when a step is displayed
-onComplete  Function  Called when last step is completed
-onExit  Function  Called when the tour ends
-onError(err, step)  Function  Called if a step cannot be displayed
-autoStart Boolean Start automatically (default: true)
+When `autoStart: true` is set, **Onbrd waits for DOM ready** and starts automatically.
 
-📚 Steps definition
+---
+
+## ⚙️ Configuration
+
+| Option                    | Type             | Description                                                                   |
+| ------------------------- | ---------------- | ----------------------------------------------------------------------------- |
+| `steps`                   | `Array`          | Ordered list of steps (see below)                                             |
+| `colors`                  | `Object`         | Customize `primary`, `dark`, `overlay`, `background` colors                   |
+| `font`                    | `String`         | Font-family used by the UI                                                    |
+| `labels`                  | `Object`         | Text labels for buttons                                                       |
+| `storageKey`              | `String \| null` | Key used to persist progress in `localStorage` (or `null` for no persistence) |
+| `storage`                 | `Storage`        | Custom storage object (optional)                                              |
+| `forceExitConfirm`        | `Boolean`        | Ask confirmation before exiting the tour                                      |
+| `onStart`                 | `Function`       | Called when the tour starts                                                   |
+| `onShowStep(step, index)` | `Function`       | Called when a step is displayed                                               |
+| `onComplete`              | `Function`       | Called when last step is completed                                            |
+| `onExit`                  | `Function`       | Called when the tour ends                                                     |
+| `onError(err, step)`      | `Function`       | Called if a step cannot be displayed                                          |
+| `autoStart`               | `Boolean`        | Start automatically (default: true)                                           |
+
+---
+
+## 📚 Steps definition
+
 Each step object can be:
 
-type: 'main' → Modal step (centered dialog)
+* `type: 'main'` → Modal step (centered dialog)
+* `type: 'tooltip'` → Anchored to a DOM element
 
-type: 'tooltip' → Anchored to a DOM element
+### Common properties for all steps:
 
-Common properties for all steps:
-Property  Description
-stepId  Required identifier
-type  'main' or 'tooltip'
-html or text  Content of the step
-selector  CSS selector for tooltip (required for tooltips)
-position  Tooltip position: 'top', 'bottom', 'left', 'right'
-captureClick  If true, waits for a click on target element
-passThrough If false, original click is prevented (default: true)
-typewriter  Simulates typing inside input (tooltip)
-moreInfo  Optional extra HTML block in tooltip
-onEnter Called when the step is displayed
-onLeave Called when leaving the step
-onNext  Called when Next is clicked
-onPrev  Called when Prev is clicked
-goBack(cb)  For "go back" handling on captureClick steps
-waitForElement  Wait for element before showing (selector or function returning a promise)
-nextCondition Enables Next button only when condition returns true
-skipHiddenElement If true and element is hidden, skips step
-autoFocus Focus input when using typewriter
-skipOnDisappear If false, pauses if element disappears (default: skips)
+| Property            | Description                                                                |
+| ------------------- | -------------------------------------------------------------------------- |
+| `stepId`            | Required identifier                                                        |
+| `type`              | `'main'` or `'tooltip'`                                                    |
+| `html` or `text`    | Content of the step                                                        |
+| `selector`          | CSS selector for tooltip (required for tooltips)                           |
+| `position`          | Tooltip position: `'top'`, `'bottom'`, `'left'`, `'right'`                 |
+| `captureClick`      | If true, waits for a click on target element                               |
+| `passThrough`       | If false, original click is prevented (default: true)                      |
+| `typewriter`        | Simulates typing inside input (tooltip)                                    |
+| `moreInfo`          | Optional extra HTML block in tooltip                                       |
+| `onEnter`           | Called when the step is displayed                                          |
+| `onLeave`           | Called when leaving the step                                               |
+| `onNext`            | Called when Next is clicked                                                |
+| `onPrev`            | Called when Prev is clicked                                                |
+| `goBack(cb)`        | For "go back" handling on `captureClick` steps                             |
+| `waitForElement`    | Wait for element before showing (selector or function returning a promise) |
+| `nextCondition`     | Enables Next button only when condition returns true                       |
+| `skipHiddenElement` | If true and element is hidden, skips step                                  |
+| `autoFocus`         | Focus input when using `typewriter`                                        |
+| `skipOnDisappear`   | If false, pauses if element disappears (default: skips)                    |
 
-🔍 API Methods
-Method  Description
-start() Start the tour (resume progress if storage enabled)
-restart() Restart from first step
-pause() / resume()  Pause / resume tour
-goToStep(idOrIndex) Jump to a specific step
-isActive()  Check if tour is running
-enableCrossPage() Enable cross-page persistence
-disableCrossPage()  Disable cross-page persistence
+---
 
-🎨 Styling / Theming
+## 🔍 API Methods
+
+| Method                 | Description                                         |
+| ---------------------- | --------------------------------------------------- |
+| `start()`              | Start the tour (resume progress if storage enabled) |
+| `restart()`            | Restart from first step                             |
+| `pause()` / `resume()` | Pause / resume tour                                 |
+| `goToStep(idOrIndex)`  | Jump to a specific step                             |
+| `isActive()`           | Check if tour is running                            |
+| `enableCrossPage()`    | Enable cross-page persistence                       |
+| `disableCrossPage()`   | Disable cross-page persistence                      |
+
+---
+
+## 🎨 Styling / Theming
+
 Onbrd exposes the following CSS variables:
 
-css
-Copy
-Edit
+```css
 :root {
   --onb-primary: #0066ff;
   --onb-dark: #222222;
@@ -126,14 +151,17 @@ Edit
   --onb-overlay: rgba(10,10,10,0.1);
   --onb-bg: rgba(255,255,255,0.92);
 }
+```
+
 You can override them globally or dynamically.
 
-🌍 Labels & Localization
+---
+
+## 🌍 Labels & Localization
+
 You can customize all UI labels:
 
-js
-Copy
-Edit
+```js
 labels: {
   next: 'Suivant →',
   prev: '← Retour',
@@ -143,25 +171,31 @@ labels: {
   of: 'sur',
   confirmExit: 'Quitter le tutoriel ?'
 }
-🔄 Cross-page onboarding
-Load plugin:
+```
 
-html
-Copy
-Edit
+---
+
+## 🔄 Cross-page onboarding
+
+1. Load plugin:
+
+```html
 <script src="onbrd-crosspage.js"></script>
-Enable in code:
+```
 
-js
-Copy
-Edit
+2. Enable in code:
+
+```js
 registerCrossPage(Onbrd);
 onboarding.enableCrossPage();
 onboarding.start();
-🏗️ Example: Admin Dashboard Tour
-js
-Copy
-Edit
+```
+
+---
+
+## 🏗️ Example: Admin Dashboard Tour
+
+```js
 steps: [
   { stepId: 'welcome', type: 'main', html: '<h2>Welcome to your Admin Dashboard</h2>' },
   { stepId: 'sidebar', type: 'tooltip', selector: '#sidebar', text: 'Navigation menu', position: 'right' },
@@ -169,17 +203,23 @@ steps: [
   { stepId: 'form-name', type: 'tooltip', selector: '#input-name', text: 'Enter user name', typewriter: 'Alice', autoFocus: true },
   { stepId: 'finish', type: 'main', html: '<h2>Tour complete!</h2>' }
 ]
-⚠️ Requirements
-Onbrd requires Popper.js v2:
+```
 
-html
-Copy
-Edit
+---
+
+## ⚠️ Requirements
+
+Onbrd requires **Popper.js v2**:
+
+```html
 <script src="https://unpkg.com/@popperjs/core@2"></script>
-📁 Project structure
-css
-Copy
-Edit
+```
+
+---
+
+## 📁 Project structure
+
+```
 src/
 dist/
 README.md
@@ -188,40 +228,72 @@ package.json
 onbrd.js
 onbrd-crosspage.js
 onbrd.css
-📃 License & Commercial Use
-MIT License
+```
 
-You can use, copy, and modify Onbrd for free for:
+---
+
+## 📃 License & Commercial Use
+
+**MIT License**
+
+You can use, copy, and modify Onbrd **for free** for:
 
 ✅ Personal
 ✅ Educational
 ✅ Non-profit
 ✅ Open-source projects
 
-Commercial use requires a license (per company):
-👉 $30 one-time lifetime → PayPal: https://paypal.me/brathelot
+---
+
+**Commercial use requires a license** (per company):
+👉 **\$30 one-time lifetime** → [PayPal: https://paypal.me/brathelot](https://paypal.me/brathelot)
 
 An invoice will be issued to the company name and email you provide.
 
-Examples of commercial use:
+**Examples of commercial use**:
 
-Proprietary SaaS
-
-B2B or internal tools
-
-Client projects
-
-Commercial websites/apps
+* Proprietary SaaS
+* B2B or internal tools
+* Client projects
+* Commercial websites/apps
 
 You may not resell, redistribute, or sublicense the library.
 
-💬 Support & Contact
-Issues and PR on GitHub
+---
 
-Email: benjamin [at] rathelot [dot] com (no spam please!)
+## 💬 Support & Contact
 
-🚫 Disclaimer
-The software is provided as-is, without warranty of any kind, express or implied.
+* Issues and PR on GitHub
+* Email: `benjamin [at] rathelot [dot] com` (no spam please!)
+
+---
+
+## 🚫 Disclaimer
+
+The software is provided **as-is**, without warranty of any kind, express or implied.
 In no event shall the author be liable for any damages, losses or claims of any kind.
 
-👉 Ready to improve your onboarding? See the try me.html demo! 🚀
+---
+
+👉 Ready to improve your onboarding? See the `try me.html` demo! 🚀
+
+---
+Copyright (c) 2025 Benjamin Rathelot
+
+Permission is granted to any person obtaining a copy of this software (the "Software") 
+to use, copy, and modify it for free for personal, educational, non-profit, or open-source projects.
+
+For any commercial use (including but not limited to use in proprietary applications, SaaS, client work, 
+or any activity generating revenue), a one-time lifetime license is required per company. 
+
+License purchase: https://paypal.me/brathelot (30 USD)
+The license will be issued under the company name provided at checkout and sent to your email.
+
+Redistribution, sublicensing, or resale of the Software or its derivatives is not permitted.
+
+The Software is provided "as is", without warranty of any kind, express or implied, 
+including but not limited to the warranties of merchantability, fitness for a particular purpose 
+and noninfringement. In no event shall the authors be liable for any claim, damages, or other liability.
+
+Thank you for supporting this project!
+
