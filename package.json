@@ -10,7 +10,19 @@
     "license.md",
     "readme.md"
   ],
-  "keywords": ["onboarding", "tour", "guide","introduction", "front-end", "js", "demo", "intro", "onbrd", "presentation", "ui"],
+  "keywords": [
+    "onboarding",
+    "tour",
+    "guide",
+    "introduction",
+    "front-end",
+    "js",
+    "demo",
+    "intro",
+    "onbrd",
+    "presentation",
+    "ui"
+  ],
   "license": "MIT non-commercial",
   "author": "Benjamin Rathelot",
   "repository": {
@@ -21,4 +33,7 @@
   "bugs": {
     "url": "https://github.com/benjaminrathelot/onbrd/issues"
   },
+  "dependencies": {
+    "@popperjs/core": "^2.11.8"
+  }
 }
