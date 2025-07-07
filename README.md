@@ -5,11 +5,17 @@
 **Onbrd.js** is a lightweight JavaScript engine to create **interactive onboarding experiences** on web applications:
 
 ✅ Tooltips anchored to elements
+
 ✅ Modal steps (main steps)
+
 ✅ Highlights & guided tours
+
 ✅ Click triggers and form typing
+
 ✅ Supports cross-page onboarding
+
 ✅ Tiny footprint — no dependency except [Popper.js v2](https://popper.js.org/)
+
 ✅ Works with any framework (vanilla JS, React, Vue...)
 
 Perfect for **SaaS platforms, Admin Dashboards, B2B tools, Internal apps**.
@@ -21,15 +27,25 @@ Perfect for **SaaS platforms, Admin Dashboards, B2B tools, Internal apps**.
 **Why Onbrd.js is more powerful than most onboarding tools:**
 
 ✅ Supports both **main modals** and **tooltips**
+
 ✅ **Click interception**: wait for a user click before progressing (ex: "Click Add User")
+
 ✅ Control whether click is passed through (`passThrough: true|false`)
+
 ✅ **Typewriter effect**: simulate typing in fields (ex: forms)
+
 ✅ **NextCondition**: dynamically enable Next button (ex: user must fill form)
+
 ✅ **Auto scroll & highlight**
+
 ✅ **Waits for async content** (`waitForElement`)
+
 ✅ Cross-page onboarding with persistence
+
 ✅ Tiny bundle, works with any stack: vanilla JS, React, Vue, Angular
+
 ✅ No runtime dependency except Popper.js (2kb gzipped)
+
 ✅ Full CSS customization and localization
 
 
